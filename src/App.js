@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import LanguageSelector from "./LanguageSelector";
 
@@ -18,10 +18,22 @@ export default function App() {
     "<p>Hello <strong>world</strong>!</p>"
   );
   const [translatedHtml, setTranslatedHtml] = useState("");
-  const [sourceLang, setSourceLang] = useState("en");
-  const [targetLang, setTargetLang] = useState("uk");
+  const [sourceLang, setSourceLang] = useState(
+    () => localStorage.getItem("sourceLang") || "en"
+  );
+  const [targetLang, setTargetLang] = useState(
+    () => localStorage.getItem("targetLang") || "uk"
+  );
   const [copied, setCopied] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    localStorage.setItem("sourceLang", sourceLang);
+  }, [sourceLang]);
+
+  useEffect(() => {
+    localStorage.setItem("targetLang", targetLang);
+  }, [targetLang]);
 
   const languages = [
     { code: "en", name: "English" },
