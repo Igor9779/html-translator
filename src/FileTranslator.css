@@ -1,0 +1,26 @@
+.file-translator {
+  margin: 20px auto;
+  padding: 15px;
+  max-width: 700px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background: #fafafa;
+  font-family: sans-serif;
+}
+
+.file-translator .ft-label {
+  display: flex;
+  flex-direction: column;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.file-translator .ft-input {
+  margin-top: 6px;
+}
+
+.file-translator .ft-loader {
+  margin-top: 10px;
+  font-size: 0.95rem;
+  color: #555;
+}

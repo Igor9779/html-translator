@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import LanguageSelector from "./LanguageSelector";
+import FileTranslator from "./FileTranslator";
 
 async function translateTextGoogle(text, source = "en", target = "uk") {
   if (!text.trim()) return text;
@@ -93,6 +94,7 @@ export default function App() {
           onTargetChange={setTargetLang}
           languages={languages}
         />
+        <FileTranslator sourceLang={sourceLang} targetLang={targetLang} />
         <textarea
           rows={4}
           style={{ width: "100%", fontFamily: "monospace" }}
