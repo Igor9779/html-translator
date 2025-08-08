@@ -88,6 +88,20 @@ export default function App() {
           onChange={(e) => setInputHtml(e.target.value)}
         />
         <button
+          onClick={() => setInputHtml("")}
+          style={{
+            margin: "10px 8px",
+            padding: "6px 12px",
+            background: "#e53e3e",
+            color: "#fff",
+            border: "none",
+            borderRadius: 4,
+            cursor: "pointer",
+          }}
+        >
+          Очистити
+        </button>
+        <button
           onClick={handleTranslate}
           disabled={loading}
           style={{
