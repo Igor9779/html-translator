@@ -47,6 +47,7 @@ export default function App() {
     { code: "et", name: "Eesti" },
     { code: "pt", name: "Português" },
     { code: "cs", name: "Čeština" },
+    { code: "ro", name: "Română" },
   ];
 
   const handleTranslate = async () => {
