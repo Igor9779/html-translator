@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import LanguageSelector from "./LanguageSelector";
 import FileTranslator from "./FileTranslator";
+import ImageZipCompressor from "./ImageZipCompressor";
 
 async function translateTextGoogle(text, source = "en", target = "uk") {
   if (!text.trim()) return text;
@@ -76,18 +77,15 @@ export default function App() {
 
   return (
     <>
-      <style>{`@keyframes spin { to { transform: rotate(360deg); } }
-.loader-overlay { position: fixed; top:0; left:0; width:100%; height:100%; background:rgba(255,255,255,0.7); display:flex; align-items:center; justify-content:center; z-index:1000; }
-.spinner { width:60px; height:60px; border:8px solid #f3f3f3; border-top-color:#2563eb; border-radius:50%; animation:spin 1s linear infinite; }`}</style>
-      <div
-        style={{
-          padding: 20,
-          maxWidth: 700,
-          margin: "0 auto",
-          fontFamily: "sans-serif",
-        }}
-      >
-        <h2>HTML-перекладач</h2>
+      <style>{`
+      @keyframes spin { to { transform: rotate(360deg); } }
+    `}</style>
+
+      <div className="max-w-2xl mx-auto p-6 font-sans">
+        <h2 className="text-2xl font-bold text-gray-800 mb-4 text-center">
+          HTML-перекладач
+        </h2>
+
         <LanguageSelector
           sourceLang={sourceLang}
           targetLang={targetLang}
@@ -95,84 +93,74 @@ export default function App() {
           onTargetChange={setTargetLang}
           languages={languages}
         />
+
         <FileTranslator sourceLang={sourceLang} targetLang={targetLang} />
+
         <textarea
           rows={4}
-          style={{ width: "100%", fontFamily: "monospace" }}
+          className="w-full mt-4 p-3 border border-gray-300 rounded-md font-mono focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
           value={inputHtml}
           onChange={(e) => setInputHtml(e.target.value)}
+          placeholder="Вставте сюди HTML..."
         />
-        <button
-          onClick={() => setInputHtml("")}
-          style={{
-            margin: "10px 8px",
-            padding: "6px 12px",
-            background: "#e53e3e",
-            color: "#fff",
-            border: "none",
-            borderRadius: 4,
-            cursor: "pointer",
-          }}
-        >
-          Очистити
-        </button>
-        <button
-          onClick={handleTranslate}
-          disabled={loading}
-          style={{
-            margin: "10px 0",
-            padding: "8px 16px",
-            background: "#2563eb",
-            color: "#fff",
-            border: "none",
-            borderRadius: 4,
-            cursor: loading ? "not-allowed" : "pointer",
-          }}
-        >
-          {loading ? "Перекладаємо…" : "Перекласти"}
-        </button>
+
+        <div className="flex flex-wrap items-center gap-3 mt-4">
+          <button
+            onClick={() => setInputHtml("")}
+            className="px-4 py-2 bg-red-600 text-white rounded-md shadow hover:bg-red-700 transition"
+          >
+            Очистити
+          </button>
+          <button
+            onClick={handleTranslate}
+            disabled={loading}
+            className={`px-5 py-2 rounded-md shadow text-white transition 
+            ${
+              loading
+                ? "bg-blue-300 cursor-not-allowed"
+                : "bg-blue-600 hover:bg-blue-700"
+            }
+          `}
+          >
+            {loading ? "Перекладаємо…" : "Перекласти"}
+          </button>
+        </div>
+
         {loading && (
-          <div className="loader-overlay">
-            <div className="spinner" />
+          <div className="fixed inset-0 bg-white/70 flex items-center justify-center z-50">
+            <div className="w-16 h-16 border-8 border-gray-200 border-t-blue-600 rounded-full animate-spin"></div>
           </div>
         )}
-        <h3>Результат:</h3>
+
+        <h3 className="text-lg font-semibold mt-6 mb-2 text-gray-800">
+          Результат:
+        </h3>
         <div
-          style={{ border: "1px solid #ccc", padding: 10, minHeight: 60 }}
+          className="border border-gray-300 rounded-md p-4 bg-gray-50 min-h-[60px]"
           dangerouslySetInnerHTML={{ __html: translatedHtml }}
         />
-        <h3>Сирий HTML:</h3>
-        <button
-          onClick={handleCopy}
-          style={{
-            margin: "10px 0 5px",
-            padding: "6px 12px",
-            background: "#4caf50",
-            color: "#fff",
-            border: "none",
-            borderRadius: 4,
-            cursor: "pointer",
-          }}
-        >
-          Скопіювати
-        </button>
-        {copied && (
-          <span style={{ marginLeft: 8, color: "#4caf50", fontWeight: "bold" }}>
-            Скопійовано!
-          </span>
-        )}
-        <pre
-          style={{
-            border: "1px solid #ccc",
-            padding: 10,
-            whiteSpace: "pre-wrap",
-            background: "#f9f9f9",
-            fontFamily: "monospace",
-            marginTop: 5,
-          }}
-        >
+
+        <h3 className="text-lg font-semibold mt-6 mb-2 text-gray-800">
+          Сирий HTML:
+        </h3>
+        <div className="flex items-center gap-2 mb-2">
+          <button
+            onClick={handleCopy}
+            className="px-4 py-2 bg-green-600 text-white rounded-md shadow hover:bg-green-700 transition"
+          >
+            Скопіювати
+          </button>
+          {copied && (
+            <span className="text-green-600 font-semibold">Скопійовано!</span>
+          )}
+        </div>
+
+        <pre className="border border-gray-300 rounded-md bg-gray-100 p-4 whitespace-pre-wrap font-mono text-sm">
           {translatedHtml}
         </pre>
+        <div className="mt-8">
+          <ImageZipCompressor />
+        </div>
       </div>
     </>
   );

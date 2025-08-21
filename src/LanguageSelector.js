@@ -12,12 +12,13 @@ export default function LanguageSelector({
   languages,
 }) {
   return (
-    <div style={{ display: "flex", gap: "1rem", marginBottom: 10 }}>
-      <label style={{ display: "flex", flexDirection: "column" }}>
+    <div className="flex gap-4 mb-3">
+      <label className="flex flex-col text-sm font-medium text-gray-700">
         Звідки:
         <select
           value={sourceLang}
           onChange={(e) => onSourceChange(e.target.value)}
+          className="mt-1 border border-gray-300 rounded-md px-3 py-2 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
         >
           {languages.map((lang) => (
             <option key={lang.code} value={lang.code}>
@@ -26,11 +27,13 @@ export default function LanguageSelector({
           ))}
         </select>
       </label>
-      <label style={{ display: "flex", flexDirection: "column" }}>
+
+      <label className="flex flex-col text-sm font-medium text-gray-700">
         Куди:
         <select
           value={targetLang}
           onChange={(e) => onTargetChange(e.target.value)}
+          className="mt-1 border border-gray-300 rounded-md px-3 py-2 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
         >
           {languages.map((lang) => (
             <option key={lang.code} value={lang.code}>
