@@ -171,12 +171,12 @@ export default function ImageZipCompressor() {
   }
 
   return (
-    <div className="max-w-3xl mx-auto p-6">
-      <h2 className="text-2xl font-bold text-gray-800 mb-4 text-center">
+    <div className="max-w-3xl mx-auto p-6 bg-white dark:bg-gray-900 rounded-lg shadow-md">
+      <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-4 text-center">
         Стиснення зображень у ZIP (≤ 190KB) з оригінальним форматом
       </h2>
 
-      <div className="flex flex-col items-center gap-3 border-2 border-dashed border-gray-300 rounded-lg p-6 bg-white">
+      <div className="flex flex-col items-center gap-3 border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg p-6 bg-white dark:bg-gray-800">
         <input
           ref={inputRef}
           type="file"
@@ -187,42 +187,44 @@ export default function ImageZipCompressor() {
         />
         <button
           onClick={() => inputRef.current?.click()}
-          className="px-4 py-2 bg-blue-600 text-white rounded-md shadow hover:bg-blue-700 transition"
+          className="px-4 py-2 bg-blue-600 text-white rounded-md shadow hover:bg-blue-700 transition dark:bg-blue-500 dark:hover:bg-blue-600"
         >
           Обрати зображення
         </button>
-        <p className="text-sm text-gray-600">
+        <p className="text-sm text-gray-600 dark:text-gray-400">
           Підтримувані формати: JPG, JPEG, PNG, WEBP
         </p>
       </div>
 
       {!!files.length && (
         <div className="mt-5">
-          <h3 className="font-semibold text-gray-800 mb-2">
+          <h3 className="font-semibold text-gray-800 dark:text-gray-100 mb-2">
             Обрано файлів: {files.length}
           </h3>
           <ul className="space-y-2">
             {files.map((f) => (
               <li
                 key={f.name + f.size}
-                className="flex items-center justify-between gap-3 rounded-md border border-gray-200 p-3 bg-gray-50"
+                className="flex items-center justify-between gap-3 rounded-md border border-gray-200 dark:border-gray-700 p-3 bg-gray-50 dark:bg-gray-800"
               >
                 <div className="min-w-0">
-                  <p className="truncate font-medium text-gray-800">{f.name}</p>
-                  <p className="text-xs text-gray-500">
+                  <p className="truncate font-medium text-gray-800 dark:text-gray-100">
+                    {f.name}
+                  </p>
+                  <p className="text-xs text-gray-500 dark:text-gray-400">
                     {(f.size / 1024).toFixed(1)} KB
                   </p>
                 </div>
                 <div className="flex items-center gap-3">
                   {progressMap[f.name] != null && (
                     <div className="w-40">
-                      <div className="w-full h-2 bg-gray-200 rounded">
+                      <div className="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded">
                         <div
-                          className="h-2 bg-blue-600 rounded"
+                          className="h-2 bg-blue-600 dark:bg-blue-400 rounded"
                           style={{ width: `${progressMap[f.name]}%` }}
                         />
                       </div>
-                      <div className="text-xs text-gray-600 mt-1 text-right">
+                      <div className="text-xs text-gray-600 dark:text-gray-300 mt-1 text-right">
                         {progressMap[f.name]}%
                       </div>
                     </div>
@@ -238,8 +240,8 @@ export default function ImageZipCompressor() {
               disabled={zipping}
               className={`px-5 py-2 rounded-md text-white shadow transition ${
                 zipping
-                  ? "bg-blue-300 cursor-not-allowed"
-                  : "bg-blue-600 hover:bg-blue-700"
+                  ? "bg-blue-300 dark:bg-blue-600 cursor-not-allowed"
+                  : "bg-blue-600 dark:bg-blue-500 hover:bg-blue-700 dark:hover:bg-blue-600"
               }`}
             >
               {zipping ? "Опрацьовуємо…" : "Стиснути та завантажити ZIP"}
@@ -250,13 +252,13 @@ export default function ImageZipCompressor() {
                 setProgressMap({});
                 if (inputRef.current) inputRef.current.value = "";
               }}
-              className="px-4 py-2 bg-red-600 text-white rounded-md shadow hover:bg-red-700 transition"
+              className="px-4 py-2 bg-red-600 text-white rounded-md shadow hover:bg-red-700 transition dark:bg-red-500 dark:hover:bg-red-600"
             >
               Очистити список
             </button>
           </div>
 
-          <p className="text-xs text-gray-500 mt-3">
+          <p className="text-xs text-gray-500 dark:text-gray-400 mt-3">
             Примітка: для PNG стискання відбувається шляхом зменшення розмірів.
             Якщо файл усе одно більший за 190 KB, це фізичне обмеження формату
             без зміни формату.

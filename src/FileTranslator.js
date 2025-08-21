@@ -67,17 +67,30 @@ export default function FileTranslator({ sourceLang, targetLang }) {
   };
 
   return (
-    <div className="file-translator">
-      <label className="ft-label">
+    <div
+      className="file-translator p-4 border border-gray-300 rounded-md shadow-sm 
+                  bg-gray-50 dark:bg-gray-800 dark:border-gray-600 transition"
+    >
+      <label className="ft-label block mb-2 font-medium text-gray-800 dark:text-gray-200">
         Завантажте HTML/PHP для перекладу:
         <input
           type="file"
           accept=".html,.php"
           onChange={handleFile}
-          className="ft-input"
+          className="ft-input mt-2 block w-full text-sm text-gray-700 dark:text-gray-300
+                   file:mr-4 file:py-2 file:px-4 file:rounded-md
+                   file:border-0 file:text-sm file:font-semibold
+                   file:bg-blue-600 file:text-white
+                   hover:file:bg-blue-700 dark:file:bg-blue-500 dark:hover:file:bg-blue-600
+                   cursor-pointer"
         />
       </label>
-      {loading && <div className="ft-loader">Перекладаємо файл…</div>}
+
+      {loading && (
+        <div className="ft-loader mt-3 text-blue-600 dark:text-blue-400 font-semibold animate-pulse">
+          Перекладаємо файл…
+        </div>
+      )}
     </div>
   );
 }
