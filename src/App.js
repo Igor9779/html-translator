@@ -4,6 +4,8 @@ import LanguageSelector from "./LanguageSelector";
 import FileTranslator from "./FileTranslator";
 import ImageZipCompressor from "./ImageZipCompressor";
 import ThemeToggle from "./ThemeToggle";
+import AddressGenerator from "./AddressGenerator";
+import NumberGenerator from "./NumberGenerator";
 
 async function translateTextGoogle(text, source = "en", target = "uk") {
   if (!text.trim()) return text;
@@ -171,6 +173,12 @@ export default function App() {
 
           <div className="mt-8">
             <ImageZipCompressor />
+          </div>
+          <div className="mt-8">
+            <AddressGenerator />
+          </div>
+          <div className="mt-8">
+            <NumberGenerator />
           </div>
         </div>
       </div>
