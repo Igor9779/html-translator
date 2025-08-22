@@ -161,11 +161,11 @@ export default function AddressGenerator() {
                  dark:bg-gray-900 dark:text-gray-100 transition-colors"
     >
       <h2 className="text-xl font-semibold mb-4 text-center">
-        Random Address Generator
+        Генератор рандомних адрес
       </h2>
 
       <label className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-200">
-        Country
+        Країна
       </label>
       <select
         value={selectedCountry}
@@ -191,7 +191,7 @@ export default function AddressGenerator() {
                    dark:bg-blue-500 dark:hover:bg-blue-600
                    focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
       >
-        Generate Address
+        Згенерувати адресу
       </button>
 
       {address && (
@@ -201,16 +201,16 @@ export default function AddressGenerator() {
                      dark:bg-gray-800 dark:border-gray-700"
         >
           <p className="text-sm">
-            <span className="font-semibold">Street:</span> {address.street}
+            <span className="font-semibold">Вулиця:</span> {address.street}
           </p>
           <p className="text-sm">
-            <span className="font-semibold">City:</span> {address.city}
+            <span className="font-semibold">Місто:</span> {address.city}
           </p>
           <p className="text-sm">
             <span className="font-semibold">ZIP:</span> {address.zipCode}
           </p>
           <p className="text-sm">
-            <span className="font-semibold">Country:</span> {address.country}
+            <span className="font-semibold">Країна:</span> {address.country}
           </p>
 
           <div className="mt-3 flex items-center gap-3">
