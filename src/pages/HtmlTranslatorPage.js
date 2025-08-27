@@ -44,6 +44,7 @@ export default function HtmlTranslatorPage() {
     { code: "pt", name: "Português" },
     { code: "cs", name: "Čeština" },
     { code: "ro", name: "Română" },
+    { code: "ar", name: "العربية" },
   ];
 
   const handleTranslate = async () => {
